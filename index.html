@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Notes - Minimalist Post-It Style</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Architects+Daughter&family=Indie+Flower&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="images/Frame 4.svg" alt="Notes Logo" class="logo-image">
+                </div>
+                <div class="logo-text">
+                    <h1 class="logo-title">Notes</h1>
+                    <span class="logo-subtitle">Project Manager</span>
+                </div>
+            </div>
+            <button class="add-note-btn" id="addNoteBtn">
+                <i class="fas fa-plus"></i>
+            </button>
+        </header>
+
+        <div class="notes-grid" id="notesGrid">
+            <!-- Notes will be dynamically added here -->
+        </div>
+
+        <!-- Add Note Modal -->
+        <div class="modal" id="noteModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Create New Note</h2>
+                    <button class="close-btn" id="closeModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="noteForm">
+                    <div class="form-group">
+                        <label for="noteTitle">Title</label>
+                        <input type="text" id="noteTitle" placeholder="Enter note title..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="noteContent">Content</label>
+                        <textarea id="noteContent" placeholder="Write your note here..." rows="6" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="noteColor">Color</label>
+                        <div class="color-picker">
+                            <input type="radio" name="color" value="#fff9c4" id="yellow" checked>
+                            <label for="yellow" class="color-option" style="background-color: #fff9c4;"></label>
+                            
+                            <input type="radio" name="color" value="#f8bbd9" id="pink">
+                            <label for="pink" class="color-option" style="background-color: #f8bbd9;"></label>
+                            
+                            <input type="radio" name="color" value="#c8e6c9" id="green">
+                            <label for="green" class="color-option" style="background-color: #c8e6c9;"></label>
+                            
+                            <input type="radio" name="color" value="#bbdefb" id="blue">
+                            <label for="blue" class="color-option" style="background-color: #bbdefb;"></label>
+                            
+                            <input type="radio" name="color" value="#ffe0b2" id="orange">
+                            <label for="orange" class="color-option" style="background-color: #ffe0b2;"></label>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+                        <button type="submit" class="btn-primary">Create Note</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
