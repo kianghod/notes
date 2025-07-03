@@ -22,8 +22,8 @@ body {
 /* Header Styles */
 .header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 3rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -111,6 +111,12 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
+}
+
+/* Note Creator Styles */
+.note-creator {
+    margin-bottom: 2rem;
+    max-width: 100%;
 }
 
 /* Note Card Styles */
@@ -358,123 +364,118 @@ body {
     position: relative;
 }
 
-/* Minimal Modal Redesign */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.08);
-    backdrop-filter: blur(2px);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 0.18s cubic-bezier(.4,0,.2,1);
-    overflow-y: auto;
-}
-.modal.show {
+/* Header actions zone */
+.header-actions {
     display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
 }
-.modal-content {
-    background: #fff;
-    border-radius: 16px;
-    padding: 1.2rem 1.1rem 1.1rem 1.1rem;
-    width: 96vw;
-    max-width: 340px;
-    min-width: 0;
-    box-shadow: 0 2px 16px 0 rgba(0,0,0,0.04);
-    border: 1px solid #f3f4f6;
-    animation: slideIn 0.18s cubic-bezier(.4,0,.2,1);
+
+/* Redesigned Minimal Modal */
+/* Inline Note Creator Styles */
+.note-creator {
+    background: #fff9c4;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
     position: relative;
-    margin: auto;
-    overflow: visible;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    transform: rotate(-1deg);
+    animation: slideIn 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
-.modal-header {
+
+.note-creator-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.creator-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.5rem;
-    padding-bottom: 0;
-    border-bottom: none;
+    margin-bottom: 1rem;
 }
-.modal-header h2 {
-    font-size: 1.02rem;
-    font-weight: 500;
-    color: #22223b;
-    letter-spacing: 0.01em;
+
+.creator-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
     margin: 0;
 }
-.close-btn {
+
+.close-creator-btn {
     background: none;
     border: none;
-    font-size: 1.1rem;
-    color: #bdbdbd;
-    padding: 0.1rem;
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    color: #7f8c8d;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.15s;
-    position: absolute;
-    top: 0.7rem;
-    right: 0.7rem;
-    z-index: 2;
+    width: 28px;
+    height: 28px;
 }
-.close-btn:hover {
-    background: #f3f4f6;
-    color: #ef4444;
+
+.close-creator-btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+    color: #2c3e50;
 }
 .form-group {
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.9rem;
 }
 .form-group label {
     display: block;
     margin-bottom: 0.13rem;
     font-weight: 400;
     color: #6b7280;
-    font-size: 0.78rem;
+    font-size: 0.82rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
 }
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 0.18rem 0;
+    padding: 0.5rem 0;
     border: none;
-    border-bottom: 1.2px solid #e5e7eb;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
     border-radius: 0;
-    font-size: 0.93rem;
+    font-size: 1rem;
     font-family: inherit;
     background: transparent;
-    color: #22223b;
-    transition: border-color 0.15s;
+    color: #2c3e50;
+    transition: border-color 0.3s ease;
     box-shadow: none;
     resize: none;
 }
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-bottom: 1.2px solid #667eea;
+    border-bottom: 2px solid #667eea;
     background: transparent;
 }
 .form-group textarea {
-    min-height: 60px;
-    max-height: 180px;
+    min-height: 64px;
+    max-height: 200px;
     line-height: 1.5;
 }
 .color-picker {
     display: flex;
-    gap: 0.4rem;
-    margin-top: 0.1rem;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
     align-items: center;
 }
 .color-option {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     border: 1.5px solid #e5e7eb;
     display: inline-block;
@@ -489,17 +490,17 @@ body {
 .color-picker input[type="radio"]:checked + .color-option {
     border: 2.2px solid #667eea;
 }
-.form-actions {
+.form-actions, .creator-actions {
     display: flex;
     justify-content: flex-end;
-    gap: 0.5rem;
-    margin-top: 0.7rem;
+    gap: 0.6rem;
+    margin-top: 1rem;
 }
 .btn-primary, .btn-secondary {
     border: none;
     border-radius: 999px;
-    font-size: 0.88rem;
-    padding: 0.38rem 1.1rem;
+    font-size: 1.01rem;
+    padding: 0.48rem 1.3rem;
     font-weight: 500;
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
@@ -576,13 +577,12 @@ body {
         gap: 1.5rem;
     }
     
-    .modal-content {
-        margin: 1rem;
+    .note-creator {
         padding: 1rem;
-        max-width: 320px;
+        margin-bottom: 1rem;
     }
     
-    .form-actions {
+    .form-actions, .creator-actions {
         flex-direction: column;
     }
     
@@ -650,4 +650,218 @@ body, html {
 #noteTags::placeholder {
   text-align: left !important;
   direction: ltr !important;
+}
+
+/* Hello Kitty Theme */
+.hello-kitty-theme {
+  background: #ffe4f0 !important;
+  background-image: repeating-linear-gradient(135deg, #fff6fb 0 40px, #ffe4f0 40px 80px);
+}
+
+.hello-kitty-theme .note-creator {
+  background: #fff6fb !important;
+  border: 2.5px solid #ffb6d5;
+  box-shadow: 0 4px 24px 0 #ffb6d555, 0 1.5px 0 #ffb6d5;
+  border-radius: 18px;
+  position: relative;
+}
+
+.hello-kitty-theme .note-creator::before {
+  content: '🎀';
+  position: absolute;
+  top: -18px;
+  left: 12px;
+  font-size: 1.5rem;
+  pointer-events: none;
+}
+.hello-kitty-theme .header {
+  background: transparent;
+}
+.hello-kitty-theme .note {
+  background: #fff6fb !important;
+  border: 2.5px solid #ffb6d5;
+  box-shadow: 0 4px 24px 0 #ffb6d555, 0 1.5px 0 #ffb6d5;
+  border-radius: 18px;
+  position: relative;
+}
+.hello-kitty-theme .note::before {
+  content: '🎀';
+  position: absolute;
+  top: -18px;
+  left: 12px;
+  font-size: 1.5rem;
+  pointer-events: none;
+}
+.hello-kitty-theme .add-note-btn,
+.hello-kitty-theme .btn-primary {
+  background: linear-gradient(135deg, #ffb6d5 60%, #fff6fb 100%);
+  color: #d72660;
+  border: 2px solid #ffb6d5;
+  box-shadow: 0 2px 8px #ffb6d555;
+}
+.hello-kitty-theme .add-note-btn:hover,
+.hello-kitty-theme .btn-primary:hover {
+  background: #fff6fb;
+  color: #d72660;
+  border-color: #d72660;
+}
+.hello-kitty-theme .btn-secondary {
+  background: #fff6fb;
+  color: #d72660;
+  border: 1.5px solid #ffb6d5;
+}
+.hello-kitty-theme .btn-secondary:hover {
+  background: #ffb6d5;
+  color: #fff;
+}
+.hello-kitty-theme .theme-switcher-btn {
+  background: #fff6fb;
+  color: #d72660;
+  border: 2px solid #ffb6d5;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.3rem;
+  margin-right: 0.5rem;
+  box-shadow: 0 2px 8px #ffb6d555;
+  transition: background 0.15s, color 0.15s, border 0.15s;
+}
+.hello-kitty-theme .theme-switcher-btn:hover {
+  background: #ffb6d5;
+  color: #fff;
+  border-color: #d72660;
+}
+
+/* Theme Dropdown Styles */
+.theme-dropdown-container {
+  position: relative;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+.theme-dropdown-btn {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, border 0.15s;
+}
+.theme-dropdown-btn:hover {
+  background: #f3f4f6;
+  border-color: #bdbdbd;
+}
+.theme-dropdown-list {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  min-width: 140px;
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  z-index: 1002;
+  padding: 0.3rem 0;
+  font-size: 1rem;
+  animation: fadeIn 0.18s cubic-bezier(.4,0,.2,1);
+}
+.theme-option {
+  padding: 0.4rem 1.1rem 0.4rem 0.7rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: background 0.13s, color 0.13s;
+  color: #374151;
+}
+.theme-option:hover {
+  background: #ffe4f0;
+  color: #d72660;
+}
+.theme-option span {
+  font-size: 1.2em;
+}
+
+/* Cat Theme */
+.cat-theme {
+  background: #fffbe7 !important;
+  background-image: repeating-linear-gradient(135deg, #fffbe7 0 40px, #fff3c4 40px 80px);
+}
+
+.cat-theme .note-creator {
+  background: #fffbe7 !important;
+  border: 2.5px solid #ffd54f;
+  box-shadow: 0 4px 24px 0 #ffd54f55, 0 1.5px 0 #ffd54f;
+  border-radius: 18px;
+  position: relative;
+}
+
+.cat-theme .note-creator::before {
+  content: '🐱';
+  position: absolute;
+  top: -18px;
+  left: 12px;
+  font-size: 1.5rem;
+  pointer-events: none;
+}
+.cat-theme .header {
+  background: transparent;
+}
+.cat-theme .note {
+  background: #fff9e3 !important;
+  border: 2.5px solid #e0a96d;
+  box-shadow: 0 4px 24px 0 #e0a96d33, 0 1.5px 0 #e0a96d;
+  border-radius: 18px 18px 24px 24px;
+  position: relative;
+}
+.cat-theme .note::before {
+  content: '🐾';
+  position: absolute;
+  top: -18px;
+  left: 12px;
+  font-size: 1.5rem;
+  pointer-events: none;
+}
+.cat-theme .add-note-btn,
+.cat-theme .btn-primary {
+  background: linear-gradient(135deg, #e0a96d 60%, #fff9e3 100%);
+  color: #6d4c1e;
+  border: 2px solid #e0a96d;
+  box-shadow: 0 2px 8px #e0a96d33;
+}
+.cat-theme .add-note-btn:hover,
+.cat-theme .btn-primary:hover {
+  background: #fff9e3;
+  color: #6d4c1e;
+  border-color: #6d4c1e;
+}
+.cat-theme .btn-secondary {
+  background: #fff9e3;
+  color: #6d4c1e;
+  border: 1.5px solid #e0a96d;
+}
+.cat-theme .btn-secondary:hover {
+  background: #e0a96d;
+  color: #fff;
+}
+.cat-theme .theme-dropdown-btn {
+  background: #fff9e3;
+  color: #6d4c1e;
+  border: 2px solid #e0a96d;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.3rem;
+  margin-right: 0.5rem;
+  box-shadow: 0 2px 8px #e0a96d33;
+  transition: background 0.15s, color 0.15s, border 0.15s;
+}
+.cat-theme .theme-dropdown-btn:hover {
+  background: #e0a96d;
+  color: #fff;
+  border-color: #6d4c1e;
 } 

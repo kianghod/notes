@@ -20,58 +20,63 @@
                     <span class="logo-subtitle">Project Manager</span>
                 </div>
             </div>
-            <button class="add-note-btn" id="addNoteBtn">
-                <i class="fas fa-plus"></i>
-            </button>
+            <div class="header-actions">
+                <button class="add-note-btn" id="addNoteBtn">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="theme-dropdown-container">
+                    <button class="theme-dropdown-btn" id="themeDropdownBtn" title="Select Theme">
+                        <span id="currentThemeIcon">🎨</span>
+                    </button>
+                    <div class="theme-dropdown-list" id="themeDropdown" style="display:none;">
+                        <div class="theme-option" data-theme="default"><span>🎨</span> Default</div>
+                        <div class="theme-option" data-theme="hello-kitty"><span>🎀</span> Hello Kitty</div>
+                        <div class="theme-option" data-theme="cat"><span>🐱</span> Cat</div>
+                    </div>
+                </div>
+            </div>
         </header>
 
-        <div class="notes-grid" id="notesGrid">
-            <!-- Notes will be dynamically added here -->
-        </div>
-
-        <!-- Add Note Modal -->
-        <div class="modal" id="noteModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Create New Note</h2>
-                    <button class="close-btn" id="closeModal">
+        <!-- Inline Note Creation Form -->
+        <div class="note-creator" id="noteCreator" style="display: none;">
+            <div class="note-creator-content">
+                <div class="creator-header">
+                    <h3>Create New Note</h3>
+                    <button class="close-creator-btn" id="closeCreator" aria-label="Close">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
                 <form id="noteForm">
                     <div class="form-group">
-                        <label for="noteTitle">Title</label>
-                        <input type="text" id="noteTitle" placeholder="Enter note title..." required>
+                        <input type="text" id="noteTitle" placeholder="Note title..." required autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label for="noteContent">Content</label>
-                        <textarea id="noteContent" placeholder="Write your note here..." rows="6" required></textarea>
+                        <textarea id="noteContent" placeholder="Write your note..." rows="4" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="noteColor">Color</label>
                         <div class="color-picker">
                             <input type="radio" name="color" value="#fff9c4" id="yellow" checked>
                             <label for="yellow" class="color-option" style="background-color: #fff9c4;"></label>
-                            
                             <input type="radio" name="color" value="#f8bbd9" id="pink">
                             <label for="pink" class="color-option" style="background-color: #f8bbd9;"></label>
-                            
                             <input type="radio" name="color" value="#c8e6c9" id="green">
                             <label for="green" class="color-option" style="background-color: #c8e6c9;"></label>
-                            
                             <input type="radio" name="color" value="#bbdefb" id="blue">
                             <label for="blue" class="color-option" style="background-color: #bbdefb;"></label>
-                            
                             <input type="radio" name="color" value="#ffe0b2" id="orange">
                             <label for="orange" class="color-option" style="background-color: #ffe0b2;"></label>
                         </div>
                     </div>
-                    <div class="form-actions">
+                    <div class="creator-actions">
                         <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
                         <button type="submit" class="btn-primary">Create Note</button>
                     </div>
                 </form>
             </div>
+        </div>
+
+        <div class="notes-grid" id="notesGrid">
+            <!-- Notes will be dynamically added here -->
         </div>
     </div>
 

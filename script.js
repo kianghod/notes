@@ -15,16 +15,16 @@ class ProjectNotes {
     bindEvents() {
         // Add note button
         document.getElementById('addNoteBtn').addEventListener('click', () => {
-            this.openModal();
+            this.showNoteCreator();
         });
 
-        // Modal events
-        document.getElementById('closeModal').addEventListener('click', () => {
-            this.closeModal();
+        // Note creator events
+        document.getElementById('closeCreator').addEventListener('click', () => {
+            this.hideNoteCreator();
         });
 
         document.getElementById('cancelBtn').addEventListener('click', () => {
-            this.closeModal();
+            this.hideNoteCreator();
         });
 
         // Form submission
@@ -33,25 +33,25 @@ class ProjectNotes {
             this.saveNote();
         });
 
-        // Close modal on outside click
-        document.getElementById('noteModal').addEventListener('click', (e) => {
-            if (e.target.id === 'noteModal') {
-                this.closeModal();
-            }
+        // Color change events
+        document.querySelectorAll('input[name="color"]').forEach(input => {
+            input.addEventListener('change', () => {
+                this.updateCreatorBackground();
+            });
         });
 
-        // Close modal on escape key
+        // Close creator on escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                this.closeModal();
+                this.hideNoteCreator();
             }
         });
     }
 
-    openModal(noteId = null) {
-        const modal = document.getElementById('noteModal');
+    showNoteCreator(noteId = null) {
+        const creator = document.getElementById('noteCreator');
         const form = document.getElementById('noteForm');
-        const title = document.querySelector('.modal-header h2');
+        const title = document.querySelector('.creator-header h3');
 
         this.currentNoteId = noteId;
 
@@ -63,21 +63,39 @@ class ProjectNotes {
                 document.getElementById('noteTitle').value = note.title;
                 document.getElementById('noteContent').value = note.content;
                 document.querySelector(`input[name="color"][value="${note.color}"]`).checked = true;
+                this.updateCreatorBackground();
             }
         } else {
             // Create mode
             title.textContent = 'Create New Note';
             form.reset();
+            // Set default color background
+            this.updateCreatorBackground();
         }
 
-        modal.classList.add('show');
+        creator.style.display = 'block';
         document.getElementById('noteTitle').focus();
     }
 
-    closeModal() {
-        const modal = document.getElementById('noteModal');
-        modal.classList.remove('show');
+    hideNoteCreator() {
+        const creator = document.getElementById('noteCreator');
+        creator.style.display = 'none';
         this.currentNoteId = null;
+    }
+
+    updateCreatorBackground() {
+        const creator = document.getElementById('noteCreator');
+        const selectedColor = document.querySelector('input[name="color"]:checked').value;
+        
+        if (creator) {
+            // Only change background color in default theme
+            const isDefaultTheme = !document.body.classList.contains('hello-kitty-theme') && 
+                                  !document.body.classList.contains('cat-theme');
+            
+            if (isDefaultTheme) {
+                creator.style.backgroundColor = selectedColor;
+            }
+        }
     }
 
     saveNote() {
@@ -117,7 +135,7 @@ class ProjectNotes {
 
         this.saveToLocalStorage();
         this.renderNotes();
-        this.closeModal();
+        this.hideNoteCreator();
         this.showEmptyStateIfNeeded();
     }
 
@@ -131,7 +149,7 @@ class ProjectNotes {
     }
 
     editNote(noteId) {
-        this.openModal(noteId);
+        this.showNoteCreator(noteId);
     }
 
     renderNotes() {
@@ -287,4 +305,61 @@ if (app.notes.length === 0) {
     app.notes = sampleNotes;
     app.saveToLocalStorage();
     app.renderNotes();
-} 
+}
+
+// Theme Dropdown Logic
+const themeDropdownBtn = document.getElementById('themeDropdownBtn');
+const themeDropdown = document.getElementById('themeDropdown');
+const themeOptions = document.querySelectorAll('.theme-option');
+const currentThemeIcon = document.getElementById('currentThemeIcon');
+
+const THEME_CLASS_MAP = {
+  'default': '',
+  'hello-kitty': 'hello-kitty-theme',
+  'cat': 'cat-theme'
+};
+const THEME_ICON_MAP = {
+  'default': '🎨',
+  'hello-kitty': '🎀',
+  'cat': '🐱'
+};
+
+function setTheme(theme) {
+  // Remove all theme classes
+  document.body.classList.remove('hello-kitty-theme', 'cat-theme');
+  if (THEME_CLASS_MAP[theme]) {
+    document.body.classList.add(THEME_CLASS_MAP[theme]);
+  }
+  currentThemeIcon.textContent = THEME_ICON_MAP[theme] || '🎨';
+  if (theme === 'default') {
+    localStorage.removeItem('theme');
+  } else {
+    localStorage.setItem('theme', theme);
+  }
+  
+  // Update note creator background if it's visible
+  if (app && app.updateCreatorBackground) {
+    app.updateCreatorBackground();
+  }
+}
+
+themeDropdownBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  themeDropdown.style.display = themeDropdown.style.display === 'block' ? 'none' : 'block';
+});
+
+themeOptions.forEach(option => {
+  option.addEventListener('click', (e) => {
+    const theme = option.getAttribute('data-theme');
+    setTheme(theme);
+    themeDropdown.style.display = 'none';
+  });
+});
+
+document.addEventListener('click', (e) => {
+  themeDropdown.style.display = 'none';
+});
+
+// On load, apply saved theme
+const savedTheme = localStorage.getItem('theme') || 'default';
+setTheme(savedTheme); 
